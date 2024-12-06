@@ -1,5 +1,4 @@
 import 'package:delivery_app/model/store.dart';
-import 'package:delivery_app/view/products.dart';
 import 'package:delivery_app/widget/storeitem.dart';
 import 'package:flutter/material.dart';
 

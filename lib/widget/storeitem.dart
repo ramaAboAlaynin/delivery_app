@@ -15,7 +15,7 @@ class StoreItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(Products(id: store.id!));
+        Get.to(Products(id: store.id));
       },
       child: Material(
         elevation: 2,
@@ -31,7 +31,7 @@ class StoreItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  store.image!,
+                  store.image,
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.cover,
@@ -49,7 +49,7 @@ class StoreItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    store.name!,
+                    store.name,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,

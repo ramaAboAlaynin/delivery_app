@@ -270,10 +270,10 @@ class _SignInPageState extends State<SignUpPage> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       // إذا كانت المدخلات صحيحة، انتقل إلى صفحة الشخصية
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => PersonalDetailsPage()),
-                    //   );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => PersonalDetailsPage()),
+                      // );
                     }
                   },
                   child: Text(

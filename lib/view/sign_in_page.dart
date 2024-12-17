@@ -219,7 +219,7 @@ class _SignInPageState extends State<SignInPage> {
                     }
                   },
                   child: Text(
-                    'Sign In',
+                    'Sign In In',
                     style: TextStyle(fontSize: 24),
                   ),
                 ),

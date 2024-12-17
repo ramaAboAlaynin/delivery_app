@@ -22,6 +22,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
             ),
           ),
+          Text('touks',)
          ]
       ), 
     );

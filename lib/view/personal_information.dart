@@ -1,9 +1,10 @@
-// ignore_for_file: unused_local_variable
-
+//  ignore_for_file: unused_local_variable
 import 'dart:io';
+import 'package:delivery_app/model/store.dart';
+import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
-//import 'package:image_picker/image_picker.dart';
-//import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class personal_information extends StatelessWidget {
   // const personal_information({super.key});
@@ -11,8 +12,8 @@ class personal_information extends StatelessWidget {
   @override
   personal_information creatState() => personal_information();
 
-  //File? _image;
-  // final _picker = ImagePicker();
+  File? _image;
+  final _picker = ImagePicker();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,23 +35,17 @@ class personal_information extends StatelessWidget {
               SizedBox(
                 height: 80,
               ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: null,
-                    radius: 80,
-                    ////  child: Image(
-                    // image: AssetImage(
-                    //////   "my_project/image/photo_2024-12-01_21-48-48.jpg"),
-                    // ),
-                  ),
-                  //.................
-                  GestureDetector(
-                    //onTap: pickImage,
-                    child: Icon(Icons.camera_alt),
-                  ),
-                ],
+
+              CircleAvatar(
+                backgroundColor: null,
+                radius: 80,
+                child: GestureDetector(
+                  onTap: pickImage,
+                  child: Icon(Icons.camera_alt),
+                ),
               ),
+              //.................
+
               SizedBox(
                 height: 30,
               ),
@@ -59,7 +54,7 @@ class personal_information extends StatelessWidget {
                   labelText: " First Name",
                   labelStyle:
                       TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
-                  // prefix: Icon(Icons.near_me),
+                  prefix: Icon(Icons.near_me),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
@@ -91,7 +86,7 @@ class personal_information extends StatelessWidget {
                   labelText: " Last Name",
                   labelStyle:
                       TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
-                  // prefix: Icon(Icons.near_me),
+                  prefix: Icon(Icons.near_me),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
@@ -154,12 +149,17 @@ class personal_information extends StatelessWidget {
                   vertical: 15,
                   horizontal: 50,
                 ),
-                child: Text(
-                  "Save",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 23,
-                    fontWeight: FontWeight.bold,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(Stores());
+                  },
+                  child: Text(
+                    "Save",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 shape: OutlineInputBorder(
@@ -178,9 +178,9 @@ class personal_information extends StatelessWidget {
     );
   }
 
-  // Future pickImage() async {
-  //   final ImagePicker pickImage = ImagePicker();
-  //   var xFile = await pickImage.pickImage(source: ImageSource.gallery);
-  //   _image = File(xFile!.path);
-  // }
+  Future pickImage() async {
+    final ImagePicker pickImage = ImagePicker();
+    var xFile = await pickImage.pickImage(source: ImageSource.gallery);
+    _image = File(xFile!.path);
+  }
 }

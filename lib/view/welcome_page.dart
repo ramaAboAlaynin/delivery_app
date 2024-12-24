@@ -11,20 +11,19 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Stack(
-         children: [
-          Container(
-            decoration : BoxDecoration(
-              image : DecorationImage(
-                image:AssetImage(
-                 'image\photo1final.jpg'),
-                fit:BoxFit.cover,
-              ),
+      body: Stack(children: [
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/photo1final.jpg'),
+              fit: BoxFit.cover,
             ),
           ),
-          Text('touks',)
-         ]
-      ), 
+        ),
+        Text(
+          'touks',
+        )
+      ]),
     );
   }
 }

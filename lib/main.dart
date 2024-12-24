@@ -1,4 +1,4 @@
-import 'package:delivery_app/view/personal_information.dart';
+import 'package:delivery_app/view/PersonalInformation.dart';
 //import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: personal_information(),
+      home: PersonalInformation(),
     );
   }
 }

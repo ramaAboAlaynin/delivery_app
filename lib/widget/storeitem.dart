@@ -30,7 +30,7 @@ class StoreItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
+                child: Image.network(
                   store.image,
                   width: double.infinity,
                   height: double.infinity,

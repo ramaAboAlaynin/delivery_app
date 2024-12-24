@@ -31,27 +31,27 @@ class ProductItem extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            // Positioned(
-            //   bottom: 10,
-            //   left: 10,
-            //   right: 10,
-            //   child: Container(
-            //     padding:
-            //         const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            //     decoration: BoxDecoration(
-            //       color: Colors.grey[200]!.withOpacity(0.9),
-            //       borderRadius: BorderRadius.circular(10),
-            //     ),
-            //     child: Text(
-            //       store['name']!,
-            //       textAlign: TextAlign.center,
-            //       style: const TextStyle(
-            //         fontWeight: FontWeight.bold,
-            //         color: Colors.black,
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            Positioned(
+              bottom: 10,
+              left: 10,
+              right: 10,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200]!.withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  product.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,6 +1,6 @@
-//import 'package:delivery_app/store_page.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart'as http;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -10,6 +10,25 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+
+  Future<void> signin(String phone, String pass) async {
+    var url = Uri.parse('/api/login?phone=0952432305&password=12345678');
+
+    try {
+      var response = await http.post(url);
+
+      if (response.statusCode == 200) {
+        var js = jsonDecode(response.body);
+        String token = js['token'];
+        print('The token is $token');
+      } else {
+        print('Failed to login. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -205,21 +224,26 @@ class _SignInPageState extends State<SignInPage> {
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:  Colors.white,
+                    backgroundColor: Colors.white,
                     foregroundColor: Colors.pinkAccent,
                     padding: EdgeInsets.symmetric(vertical: 20),
                   ),
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
+                      signin(
+                        _mobileController.text, // رقم الهاتف
+                        _passwordController.text, // كلمة المرور
+                      );
                       // إذا كانت المدخلات صحيحة، انتقل إلى صفحة المتجر
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => StorePage()),
-                      // );
+                      /*Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => StorePage()),
+                      );
+                      */
                     }
                   },
                   child: Text(
-                    'Sign In In',
+                    'Sign In',
                     style: TextStyle(fontSize: 24),
                   ),
                 ),

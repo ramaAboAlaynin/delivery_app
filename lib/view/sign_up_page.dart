@@ -1,7 +1,7 @@
-//import 'package:delivery_app/personal_details.dart';
-//import 'package:delivery_app/sign_up_page.dart';
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -11,6 +11,33 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignUpPage> {
+
+
+
+  Future<void> signUp(String phone, String pass, String confirmPass) async {
+
+    if (pass != confirmPass) {
+      print('Passwords do not match!');
+      return;
+    }
+    // الآن يمكنك إرسال الطلب إلى الـ API إذا كانت كلمات المرور متطابقة
+    var url = Uri.parse('/api/login?phone=0952432305&password=12345678');
+
+    try {
+      var response = await http.post(url);
+
+      if (response.statusCode == 200) {
+        var js = jsonDecode(response.body);
+        String token = js['token'];
+        print('The token is $token');
+      } else {
+        print('Failed to sign up. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
@@ -269,11 +296,16 @@ class _SignInPageState extends State<SignUpPage> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
+                      signUp(
+                        _mobileController.text,
+                        _passwordController.text,
+                        _confirmPasswordController.text,
+                      );
                       // إذا كانت المدخلات صحيحة، انتقل إلى صفحة الشخصية
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => PersonalDetailsPage()),
-                      // );
+                      /*Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PersonalDetailsPage()),
+                      );*/
                     }
                   },
                   child: Text(

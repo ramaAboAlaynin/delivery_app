@@ -14,29 +14,52 @@ class _SignInPageState extends State<SignUpPage> {
 
 
 
-  Future<void> signUp(String phone, String pass, String confirmPass) async {
-
+  Future signup(String phone, String pass, String confirmPass) async {
     if (pass != confirmPass) {
-      print('Passwords do not match!');
+      print('كلمة المرور غير متطابقة');
       return;
     }
-    // الآن يمكنك إرسال الطلب إلى الـ API إذا كانت كلمات المرور متطابقة
-    var url = Uri.parse('/api/login?phone=0952432305&password=12345678');
+    String fullPhoneNumber = '+963' + phone;
 
-    try {
-      var response = await http.post(url);
-
-      if (response.statusCode == 200) {
-        var js = jsonDecode(response.body);
-        String token = js['token'];
-        print('The token is $token');
-      } else {
-        print('Failed to sign up. Status code: ${response.statusCode}');
+    var response = await http.post(
+      Uri.parse('http://192.168.153.1:8000/api/register'),
+      body: <String, String>{
+        'phone': fullPhoneNumber,
+        'password': pass,
+        'password_confirmation': confirmPass,  // قد تحتاج إلى إضافة هذا الحقل إذا كان موجوداً في الـ API
+      },
+      headers: {
+        'Accept':'application/json'
       }
-    } catch (e) {
-      print('Error: $e');
+    );
+    print(fullPhoneNumber);
+    print(pass);
+    print(confirmPass);
+
+    if (response.statusCode == 200) {
+      var js = jsonDecode(response.body);
+
+      print(response.statusCode);
+      print(response.headers);
+      print(response.body);
+
+      String token = js['data']['original']['access_token'];
+      print('تم التسجيل بنجاح، التوكن هو: $token');
+      // إذا كانت المدخلات صحيحة، انتقل إلى صفحة الشخصية
+      /*Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PersonalDetailsPage()),
+      );
+      */
+    } else {
+      print('حدث خطأ في التسجيل، الرجاء المحاولة لاحقاً.');
+      print(response.statusCode);
+      print(response.headers);
+      print(response.body);
+
     }
   }
+
 
   final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -159,8 +182,8 @@ class _SignInPageState extends State<SignUpPage> {
                       if (value == null || value.isEmpty) {
                         return 'Please Enter Your Phone';
                       }
-                      if (value.length != 9) {
-                        return 'It should start with +963 and contain 9 digits.';
+                      if (value.length != 8) {
+                        return 'It should start with +963 and contain 8 digits.';
                       }
                       if (value[0] != '9') {
                         return 'The first digit after +963 should be 9.';
@@ -296,16 +319,12 @@ class _SignInPageState extends State<SignUpPage> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
-                      signUp(
+                      signup(
                         _mobileController.text,
                         _passwordController.text,
                         _confirmPasswordController.text,
                       );
-                      // إذا كانت المدخلات صحيحة، انتقل إلى صفحة الشخصية
-                      /*Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => PersonalDetailsPage()),
-                      );*/
+
                     }
                   },
                   child: Text(

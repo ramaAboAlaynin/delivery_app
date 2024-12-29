@@ -1,7 +1,8 @@
 // import 'package:delivery_app/model/product.dart';
-import 'package:delivery_app/model/product.dart';
+import 'package:delivery_app/controller/product_controller.dart';
 import 'package:delivery_app/widget/productitem.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Products extends StatefulWidget {
   final int id;
@@ -15,11 +16,12 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-  // late List<Product> products;
-  final Map<dynamic, List<Product>> products = {
-    1: Product.fromjson(productsMap),
-    2: Product.fromjson(productsMap2),
-  };
+  late ProductController controller;
+  @override
+  void initState() {
+    controller = Get.put(ProductController(widget.id));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +40,21 @@ class _ProductsState extends State<Products> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            childAspectRatio: 2 / 3.2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-          ),
-          itemCount: products[widget.id]?.length ?? 0,
-          itemBuilder: (context, index) {
-            final product = products[widget.id]![index];
-            return ProductItem(product: product);
+        child: Obx(
+          () {
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 2 / 3.2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+              ),
+              itemCount: controller.products.length,
+              itemBuilder: (context, index) {
+                final product = controller.products[index];
+                return ProductItem(product: product);
+              },
+            );
           },
         ),
       ),

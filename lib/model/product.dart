@@ -2,20 +2,20 @@ class Product {
   final String image;
   final String name;
   final int quantity;
-  final String describtion;
+  final String description;
 
   Product(
       {required this.image,
-      required this.describtion,
+      required this.description,
       required this.name,
       required this.quantity});
 
-  static List<Product> fromjson(List<Map<String, dynamic>> products) {
+  static List<Product> fromjson(List products) {
     return products
         .map(
           (e) => Product(
-            image: e['image'],
-            describtion: e['describtion'],
+            image: e['URL_image'],
+            description: e['description'],
             name: e['name'],
             quantity: e['quantity'],
           ),

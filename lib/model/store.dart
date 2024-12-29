@@ -19,8 +19,7 @@ class Store {
           (e) => Store(
             id: e['id'],
             name: e['name'],
-            image:
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&se',
+            image: e['URL_image'],
             createdAt: e['created_at'],
             location: e['location'],
           ),

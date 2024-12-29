@@ -1,4 +1,3 @@
-import 'package:delivery_app/view/personal_information.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:delivery_app/view/welcome_page.dart';
 import 'package:delivery_app/view/PersonalInformation.dart';

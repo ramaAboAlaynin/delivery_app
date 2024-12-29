@@ -20,6 +20,20 @@ class _PersonalInformationState extends State<PersonalInformation> {
   final _picker = ImagePicker();
 
   @override
+  void initState() {
+    super.initState();
+    fetchUserProfile().then((profileData) {
+      setState(() {
+        adminFirstNameController.text = profileData['first_name'];
+        adminLastNameController.text = profileData['last_name'];
+        adminLocationController.text = profileData['location'];
+      });
+    }).catchError((error) {
+      print(error);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 238, 238, 238),
@@ -31,7 +45,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
         backgroundColor: Color.fromARGB(255, 255, 128, 171),
       ),
       body: Container(
-        padding: EdgeInsetsDirectional.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -39,7 +53,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
             children: [
               SizedBox(height: 80),
               CircleAvatar(
-                backgroundColor: null,
+                backgroundColor: Colors.transparent,
                 radius: 80,
                 child: GestureDetector(
                   onTap: pickImage,
@@ -191,19 +205,5 @@ class _PersonalInformationState extends State<PersonalInformation> {
     } else {
       throw Exception('Failed to load user profile');
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserProfile().then((profileData) {
-      setState(() {
-        adminFirstNameController.text = profileData['first_name'];
-        adminLastNameController.text = profileData['last_name'];
-        adminLocationController.text = profileData['location'];
-      });
-    }).catchError((error) {
-      print(error);
-    });
   }
 }

@@ -17,7 +17,6 @@ class Products extends StatefulWidget {
 
 class _ProductsState extends State<Products> {
   late ProductController controller;
-
   @override
   void initState() {
     controller = Get.put(ProductController(widget.id));

@@ -324,7 +324,7 @@ class _SignInPageState extends State<SignUpPage> {
                         _passwordController.text,
                         _confirmPasswordController.text,
                       );
-
+                     print('touka');
                     }
                   },
                   child: Text(

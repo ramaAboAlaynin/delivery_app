@@ -108,7 +108,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 ),
               ),
               SizedBox(height: 30),
-              TextField(controller: adminLocationController,
+              TextField(
+                controller: adminLocationController,
                 decoration: InputDecoration(
                   labelText: "Location",
                   labelStyle:
@@ -194,6 +195,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
     }
   }
 
+  // تابع GET لجلب البيانات من API
   Future<Map<String, dynamic>> fetchUserProfile() async {
     final response = await http
         .get(Uri.parse('http://192.168.43.7:8000/api/userInformation/4'));

@@ -1,4 +1,5 @@
-
+import 'package:delivery_app/core/config.dart';
+import 'package:delivery_app/view/PersonalInformation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -11,9 +12,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignUpPage> {
-
-
-
   Future signup(String phone, String pass, String confirmPass) async {
     if (pass != confirmPass) {
       print('كلمة المرور غير متطابقة');
@@ -21,17 +19,16 @@ class _SignInPageState extends State<SignUpPage> {
     }
     String fullPhoneNumber = '+963' + phone;
 
-    var response = await http.post(
-      Uri.parse('http://192.168.153.1:8000/api/register'),
-      body: <String, String>{
-        'phone': fullPhoneNumber,
-        'password': pass,
-        'password_confirmation': confirmPass,  // قد تحتاج إلى إضافة هذا الحقل إذا كان موجوداً في الـ API
-      },
-      headers: {
-        'Accept':'application/json'
-      }
-    );
+    var response = await http.post(Uri.parse('${Config.baseUrl}/api/register'),
+        body: <String, String>{
+          'phone': fullPhoneNumber,
+          'password': pass,
+          'password_confirmation':
+              confirmPass, // قد تحتاج إلى إضافة هذا الحقل إذا كان موجوداً في الـ API
+        },
+        headers: {
+          'Accept': 'application/json'
+        });
     print(fullPhoneNumber);
     print(pass);
     print(confirmPass);
@@ -46,24 +43,22 @@ class _SignInPageState extends State<SignUpPage> {
       String token = js['data']['original']['access_token'];
       print('تم التسجيل بنجاح، التوكن هو: $token');
       // إذا كانت المدخلات صحيحة، انتقل إلى صفحة الشخصية
-      /*Navigator.push(
+      Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PersonalDetailsPage()),
+        MaterialPageRoute(builder: (context) => PersonalInformation()),
       );
-      */
     } else {
       print('حدث خطأ في التسجيل، الرجاء المحاولة لاحقاً.');
       print(response.statusCode);
       print(response.headers);
       print(response.body);
-
     }
   }
 
-
   final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   // دالة التحقق من قوة كلمة المرور
@@ -205,7 +200,7 @@ class _SignInPageState extends State<SignUpPage> {
                   SizedBox(height: 20),
                   TextFormField(
                     controller: _passwordController,
-                    obscureText: true,  // إخفاء النص داخل الحقل
+                    obscureText: true, // إخفاء النص داخل الحقل
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle: TextStyle(
@@ -251,7 +246,7 @@ class _SignInPageState extends State<SignUpPage> {
                   SizedBox(height: 20),
                   TextFormField(
                     controller: _confirmPasswordController,
-                    obscureText: true,  // إخفاء النص داخل الحقل
+                    obscureText: true, // إخفاء النص داخل الحقل
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       labelStyle: TextStyle(
@@ -281,7 +276,8 @@ class _SignInPageState extends State<SignUpPage> {
                         color: Colors.black,
                       ),
                     ),
-                    validator: _validateConfirmPassword, // التحقق من تطابق كلمة المرور
+                    validator:
+                        _validateConfirmPassword, // التحقق من تطابق كلمة المرور
                   ),
                   SizedBox(height: 20),
                 ],
@@ -324,7 +320,7 @@ class _SignInPageState extends State<SignUpPage> {
                         _passwordController.text,
                         _confirmPasswordController.text,
                       );
-                     print('touka albaali');
+                      print('touka albaali');
                     }
                   },
                   child: Text(

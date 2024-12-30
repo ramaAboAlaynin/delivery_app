@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:delivery_app/core/config.dart';
 import 'package:delivery_app/model/store.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
@@ -177,7 +178,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
       String firstName, String lastName, String location, File image) async {
     var headers = {'Accept': 'application/json'};
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.43.7:8000/api/userInformation/4'));
+        'POST', Uri.parse('${Config.baseUrl}/api/userInformation/4'));
     request.fields.addAll({
       'first_name': firstName,
       'last_name': lastName,
@@ -197,8 +198,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   // تابع GET لجلب البيانات من API
   Future<Map<String, dynamic>> fetchUserProfile() async {
-    final response = await http
-        .get(Uri.parse('http://192.168.43.7:8000/api/userInformation/4'));
+    final response =
+        await http.get(Uri.parse('${Config.baseUrl}/api/userInformation/4'));
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);

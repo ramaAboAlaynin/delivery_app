@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:delivery_app/core/config.dart';
 import 'package:delivery_app/model/store.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
@@ -19,20 +18,6 @@ class _PersonalInformationState extends State<PersonalInformation> {
   final adminLocationController = TextEditingController();
   File? _image;
   final _picker = ImagePicker();
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserProfile().then((profileData) {
-      setState(() {
-        adminFirstNameController.text = profileData['first_name'];
-        adminLastNameController.text = profileData['last_name'];
-        adminLocationController.text = profileData['location'];
-      });
-    }).catchError((error) {
-      print(error);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +43,17 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 radius: 80,
                 child: GestureDetector(
                   onTap: pickImage,
-                  child: Icon(Icons.camera_alt),
+                  child: _image == null
+                      ? Icon(Icons.camera_alt,
+                          size: 50) // Show camera icon if no image is selected
+                      : ClipOval(
+                          child: Image.file(
+                            _image!, // Display the selected image
+                            fit: BoxFit.cover,
+                            width: 160,
+                            height: 160,
+                          ),
+                        ),
                 ),
               ),
               SizedBox(height: 30),
@@ -68,7 +63,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   labelText: "First Name",
                   labelStyle:
                       TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
-                  prefix: Icon(Icons.near_me),
+                  // prefix: Icon(Icons.access_time_filled_sharp),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
@@ -92,7 +87,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   labelText: "Last Name",
                   labelStyle:
                       TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
-                  prefix: Icon(Icons.near_me),
+                  //  prefix: Icon(Icons.near_me),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
@@ -148,13 +143,18 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   borderSide: BorderSide.none,
                 ),
                 onPressed: () {
-                  profile(
-                    adminFirstNameController.text,
-                    adminLastNameController.text,
-                    adminLocationController.text,
-                    _image!,
-                  );
-                  Get.to(Stores());
+                  if (_image != null) {
+                    profile(
+                      adminFirstNameController.text,
+                      adminLastNameController.text,
+                      adminLocationController.text,
+                      _image!,
+                    );
+                    //Get.to(Stores());
+                  } else {
+                    // Handle the case when no image is selected
+                    print("No image selected.");
+                  }
                 },
               ),
               SizedBox(height: 20),
@@ -169,7 +169,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        _image = File(pickedFile
+            .path); // Update the _image variable with the picked image
       }
     });
   }
@@ -178,7 +179,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
       String firstName, String lastName, String location, File image) async {
     var headers = {'Accept': 'application/json'};
     var request = http.MultipartRequest(
-        'POST', Uri.parse('${Config.baseUrl}/api/userInformation/4'));
+        'POST', Uri.parse('http://192.168.43.7:8000/api/userInformation/4'));
     request.fields.addAll({
       'first_name': firstName,
       'last_name': lastName,
@@ -191,20 +192,16 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
+      // print response
+      print(response.statusCode);
+      print(response.stream.bytesToString());
+
+      // only if success go to home page
+      Get.to(Stores());
     } else {
       print(response.reasonPhrase);
-    }
-  }
-
-  // تابع GET لجلب البيانات من API
-  Future<Map<String, dynamic>> fetchUserProfile() async {
-    final response =
-        await http.get(Uri.parse('${Config.baseUrl}/api/userInformation/4'));
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Failed to load user profile');
+      print(response.statusCode);
+      print(response.stream.bytesToString());
     }
   }
 }

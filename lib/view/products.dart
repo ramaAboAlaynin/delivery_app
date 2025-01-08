@@ -26,38 +26,43 @@ class _ProductsState extends State<Products> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 241, 195, 211),
-        title: Text(
-          "Products",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 241, 195, 211),
+          title: Text(
+            "Products",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Obx(
-          () {
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 2 / 3.2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+        body: Column(
+          children: [
+            TextFormField(decoration: const InputDecoration()),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Obx(
+                () {
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 2 / 3.2,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemCount: controller.products.length,
+                    itemBuilder: (context, index) {
+                      final product = controller.products[index];
+                      return ProductItem(product: product);
+                    },
+                  );
+                },
               ),
-              itemCount: controller.products.length,
-              itemBuilder: (context, index) {
-                final product = controller.products[index];
-                return ProductItem(product: product);
-              },
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          ],
+        ));
   }
 }

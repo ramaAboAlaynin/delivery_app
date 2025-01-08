@@ -1,5 +1,6 @@
 // import 'package:delivery_app/model/product.dart';
 import 'package:delivery_app/controller/product_controller.dart';
+import 'package:delivery_app/model/CustomSearch.dart';
 import 'package:delivery_app/widget/productitem.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +38,18 @@ class _ProductsState extends State<Products> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: Customsearch());
+            },
+            icon: Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            iconSize: 30,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

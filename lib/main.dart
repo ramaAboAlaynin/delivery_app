@@ -1,3 +1,5 @@
+import 'package:delivery_app/view/productDetailPage.dart';
+import 'package:delivery_app/view/products.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:delivery_app/view/welcome_page.dart';
 import 'package:delivery_app/view/PersonalInformation.dart';
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: WelcomePage(),
+      debugShowCheckedModeBanner: false,
+      home: Stores(),
     );
   }
 }

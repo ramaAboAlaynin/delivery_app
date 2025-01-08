@@ -1,3 +1,5 @@
+import 'package:delivery_app/view/homa_page.dart';
+import 'package:delivery_app/view/main_page.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:delivery_app/view/welcome_page.dart';
 import 'package:delivery_app/view/PersonalInformation.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: WelcomePage(),
+      home: MainPage(),
     );
   }
 }

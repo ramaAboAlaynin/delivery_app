@@ -41,6 +41,7 @@ class _SignInPageState extends State<SignUpPage> {
       print(response.body);
 
       String token = js['data']['original']['access_token'];
+      Config.token = token;
       print('تم التسجيل بنجاح، التوكن هو: $token');
       // إذا كانت المدخلات صحيحة، انتقل إلى صفحة الشخصية
       Navigator.push(

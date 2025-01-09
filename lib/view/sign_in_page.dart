@@ -1,5 +1,12 @@
 import 'dart:convert';
+import 'package:delivery_app/core/config.dart';
+import 'package:delivery_app/model/store.dart';
+import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:get/get.dart';
+>>>>>>> 97675467cf0b69fccf00dce3b64b3faef6708709
 import 'package:http/http.dart' as http;
 
 class SignInPage extends StatefulWidget {
@@ -10,27 +17,19 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-
-  Future signin(String phone, String pass)async
-  {
+  Future signin(String phone, String pass) async {
     String fullPhoneNumber = '+963' + phone;
-    var response = await http.post(
-        Uri.parse('http://192.168.153.1:8000/api/login'),
-        body: <String,String>
-        {
-          'phone': fullPhoneNumber,
-          'password': pass,
-        },
-        headers: {
-          'lang': 'ar',
-        }
-    );
+    var response = await http
+        .post(Uri.parse('${Config.baseUrl}/api/login'), body: <String, String>{
+      'phone': fullPhoneNumber,
+      'password': pass,
+    }, headers: {
+      'lang': 'ar',
+    });
     print(fullPhoneNumber);
     print(pass);
 
-
-    if(response.statusCode==200)
-    {
+    if (response.statusCode == 200) {
       var js = jsonDecode(response.body);
       print(response.statusCode);
       print(response.headers);
@@ -39,14 +38,8 @@ class _SignInPageState extends State<SignInPage> {
       String token = js['data']['original']['access_token'];
       print('the token is $token');
       // إذا كانت المدخلات صحيحة، انتقل إلى صفحة المتجر
-      /*Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => StorePage()),
-      );
-      */
-    }
-    else
-    {
+      Get.to(Stores());
+    } else {
       print('حدث خطأ في التسجيل، الرجاء المحاولة لاحقاً.');
       print(response.statusCode);
       print(response.headers);
@@ -122,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: Text(
                       "Enter your number",
                       style: TextStyle(
-                          fontSize: 18,
+                        fontSize: 18,
                         color: Colors.pinkAccent,
                       ),
                     ),
@@ -180,7 +173,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: Text(
                       "Enter your password",
                       style: TextStyle(
-                          fontSize: 18,
+                        fontSize: 18,
                         color: Colors.pinkAccent,
                       ),
                     ),
@@ -188,7 +181,7 @@ class _SignInPageState extends State<SignInPage> {
                   SizedBox(height: 20),
                   TextFormField(
                     controller: _passwordController,
-                    obscureText: true,  // إخفاء النص داخل الحقل
+                    obscureText: true, // إخفاء النص داخل الحقل
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle: TextStyle(

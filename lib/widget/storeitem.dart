@@ -1,3 +1,4 @@
+import 'package:delivery_app/core/config.dart';
 import 'package:delivery_app/model/store.dart';
 import 'package:delivery_app/view/products.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,8 @@ class StoreItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  store.image,
+                child: Image.network(
+                  '${Config.baseUrl}${store.image}',
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.cover,

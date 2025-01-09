@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 class Productapi {
   static Future<List<Product>> fetchProducts(storeId) async {
     final response = await Dio().get("${Config.baseUrl}/api/product/$storeId");
+    print(response);
     return Product.fromjson(response.data['data']);
   }
 }

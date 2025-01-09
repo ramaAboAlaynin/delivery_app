@@ -18,7 +18,10 @@ class ProductController extends GetxController {
   fetchProducts() async {
     try {
       products.value = await Productapi.fetchProducts(storeId);
+      print("this is controller page");
+      print(products.first);
     } catch (e) {
+      print("this is controller page fail");
       print(e);
     }
   }

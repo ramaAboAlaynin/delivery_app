@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:delivery_app/core/config.dart';
 import 'package:delivery_app/model/store.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
   final adminLocationController = TextEditingController();
   File? _image;
   final _picker = ImagePicker();
+
+  get js => null;
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +153,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       adminLocationController.text,
                       _image!,
                     );
-                    //Get.to(Stores());
+                    Get.to(Stores());
                   } else {
                     // Handle the case when no image is selected
                     print("No image selected.");
@@ -177,9 +180,15 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   Future profile(
       String firstName, String lastName, String location, File image) async {
-    var headers = {'Accept': 'application/json'};
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${Config.token.toString()}'
+    };
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.43.7:8000/api/userInformation/4'));
+        'POST', Uri.parse('${Config.baseUrl}/api/update-profile'));
+    print("Name${firstName}");
+    print("Name${lastName}");
+    print("Name${location}");
     request.fields.addAll({
       'first_name': firstName,
       'last_name': lastName,
@@ -194,8 +203,10 @@ class _PersonalInformationState extends State<PersonalInformation> {
       print(await response.stream.bytesToString());
       // print response
       print(response.statusCode);
-      print(response.stream.bytesToString());
 
+      print(response.stream.bytesToString());
+      String token = js['data']['original']['access_token'];
+      print('the token is $token');
       // only if success go to home page
       Get.to(Stores());
     } else {

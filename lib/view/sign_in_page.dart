@@ -3,10 +3,7 @@ import 'package:delivery_app/core/config.dart';
 import 'package:delivery_app/model/store.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:get/get.dart';
->>>>>>> 97675467cf0b69fccf00dce3b64b3faef6708709
 import 'package:http/http.dart' as http;
 
 class SignInPage extends StatefulWidget {

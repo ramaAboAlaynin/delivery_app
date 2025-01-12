@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import 'PersonalInformation.dart';
+import 'informationPage.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -248,6 +251,11 @@ class _SignInPageState extends State<SignInPage> {
                       signin(
                         _mobileController.text,
                         _passwordController.text,
+
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PersonalInformation()),
                       );
                       print('touka albaali');
                     }

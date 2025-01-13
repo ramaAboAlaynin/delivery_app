@@ -18,7 +18,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   //String productName = 'Product Name';
   //double productPrice = 49.99;
   int selectedQuantity = 0;
-
+  late int productQuantity;
   //String productDescription = 'This is a detailed description of the product.';
 
   Color _iconColor = Colors.black;
@@ -33,9 +33,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    int productQuantity = product.quantity;
+  void initState() {
+    super.initState();
+    productQuantity = product.quantity;
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 241, 195, 211),
@@ -104,6 +108,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     onPressed: () {
                       setState(() {
                         if (selectedQuantity > 0) {
+                          print(productQuantity);
                           selectedQuantity--;
                           productQuantity++;
                         }
@@ -115,7 +120,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     icon: Icon(Icons.add),
                     onPressed: () {
                       setState(() {
-                        if (selectedQuantity < productQuantity) {
+                        if (productQuantity > 0) {
+                          print(productQuantity);
                           selectedQuantity++;
                           productQuantity--;
                         }

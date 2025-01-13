@@ -1,48 +1,63 @@
 import 'package:delivery_app/model/shoppingCart.dart';
+import 'package:delivery_app/services/shoppingCartApi.dart';
 import 'package:get/get.dart';
 
 class ShoppingcartController extends GetxController {
   var cartItems = <Shoppingcart>[].obs;
-  var totalPrice = 0.0.obs;
 
-  void addToCart(Shoppingcart item) {
-    int index = cartItems.indexWhere((cartItem) => cartItem.id == item.id);
-    if (index != -1) {
-      cartItems[index].quantity += item.quantity;
-    } else {
-      cartItems.add(item);
+  double get totalPrice => cartItems.fold(
+        0.0,
+        (sum, item) => sum + (item.price * item.quantity),
+      );
+
+  @override
+  void onInit() {
+    fetchshoppingCart();
+    super.onInit();
+  }
+
+  fetchshoppingCart() async {
+    cartItems.value = await Shoppingcartapi.fetchShoppingCart();
+  }
+
+  void addToCart(int id, int quantity) async {
+    try {
+      await Shoppingcartapi.addToCart(id, quantity);
+      fetchshoppingCart();
+    } catch (e) {
+      print(e);
     }
-    updateTotalPrice();
   }
 
-  void increaseQuantity(Shoppingcart item) {
-    item.quantity++;
-    cartItems.refresh();
-    updateTotalPrice();
-  }
-
-  void decreaseQuantity(Shoppingcart item) {
-    if (item.quantity > 1) {
-      item.quantity--;
-    } else {
-      removeFromCart(item);
+  void increaseQuantity(int id, int quantity) async {
+    try {
+      await Shoppingcartapi.updateCart(id, quantity);
+      fetchshoppingCart();
+    } catch (e) {
+      print(e);
     }
-    cartItems.refresh();
-    updateTotalPrice();
   }
 
-  void removeFromCart(Shoppingcart item) {
-    cartItems.remove(item);
-    updateTotalPrice();
+  void decreaseQuantity(int id, int quantity) async {
+    try {
+      await Shoppingcartapi.updateCart(id, quantity);
+      fetchshoppingCart();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void removeFromCart(int id) async {
+    try {
+      await Shoppingcartapi.removeProduct(id);
+    } catch (e) {
+      print(e);
+    }
+
+    fetchshoppingCart();
   }
 
   void clearCart() {
     cartItems.clear();
-    totalPrice.value = 0.0;
-  }
-
-  void updateTotalPrice() {
-    totalPrice.value =
-        cartItems.fold(0.0, (sum, item) => sum + (item.price * item.quantity));
   }
 }

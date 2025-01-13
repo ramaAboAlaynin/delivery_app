@@ -24,17 +24,6 @@ class _StoresState extends State<Stores> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 241, 195, 211),
-        title: const Text(
-          "Stores",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Obx(

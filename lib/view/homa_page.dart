@@ -284,19 +284,12 @@ Widget buildProduct(
               ),
             ),
             Positioned(
-              bottom: 5, // Add button at the bottom
+              bottom: 5,
               left: 10,
               right: 10,
               child: ElevatedButton(
                 onPressed: () {
-                  // Add product to shopping cart
-                  Get.find<ShoppingcartController>().addToCart(
-                    Shoppingcart(
-                        id: id,
-                        name: name,
-                        price: 10.0,
-                        quantity: 1), // Example price
-                  );
+                  Get.find<ShoppingcartController>().addToCart(id, 1);
                   Get.snackbar(
                     "Added to Cart",
                     "$name has been added to your cart.",

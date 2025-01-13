@@ -1,5 +1,4 @@
 import 'package:delivery_app/controller/shoppingCart_controller.dart';
-import 'package:delivery_app/view/informationPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,8 @@ class _ShoppingcartpageState extends State<Shoppingcartpage> {
 
   @override
   void initState() {
-    controller = Get.put(ShoppingcartController());
+    controller = Get.find<ShoppingcartController>();
+    controller.fetchshoppingCart();
     super.initState();
   }
 
@@ -47,8 +47,8 @@ class _ShoppingcartpageState extends State<Shoppingcartpage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              onPressed: () =>
-                                  controller.decreaseQuantity(item),
+                              onPressed: () => controller.decreaseQuantity(
+                                  item.id, item.quantity - 1),
                               icon: const Icon(Icons.remove_circle_outline),
                             ),
                             Text(
@@ -56,12 +56,13 @@ class _ShoppingcartpageState extends State<Shoppingcartpage> {
                               style: const TextStyle(fontSize: 16),
                             ),
                             IconButton(
-                              onPressed: () =>
-                                  controller.increaseQuantity(item),
+                              onPressed: () => controller.increaseQuantity(
+                                  item.id, item.quantity + 1),
                               icon: const Icon(Icons.add_circle_outline),
                             ),
                             IconButton(
-                              onPressed: () => controller.removeFromCart(item),
+                              onPressed: () =>
+                                  controller.removeFromCart(item.id),
                               icon: const Icon(Icons.delete, color: Colors.red),
                             ),
                           ],
@@ -90,10 +91,10 @@ class _ShoppingcartpageState extends State<Shoppingcartpage> {
                     ),
                   );
                 }),
-                ElevatedButton(
-                  onPressed: () => Get.to(() => const Informationpage()),
-                  child: const Text("Buy"),
-                ),
+                //  ElevatedButton(
+                // onPressed: () => Get.to(() => ),
+                // child: const Text("Buy"),
+                //),
               ],
             ),
           ),

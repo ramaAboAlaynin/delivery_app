@@ -28,18 +28,22 @@ class _StoresState extends State<Stores> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      drawer:  Drawer(
+      drawer: Drawer(
         child: Container(
-          color: Color.fromARGB(255, 238, 238, 238), // Background color of the Drawer
+          color: Color.fromARGB(
+              255, 238, 238, 238), // Background color of the Drawer
           padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               // My Orders Button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 255, 128, 171), // Button color
+                  backgroundColor:
+                      Color.fromARGB(255, 255, 128, 171), // Button color
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -101,7 +105,7 @@ class _StoresState extends State<Stores> {
                   ),
                 ),
                 onPressed: () {
-                 Get.to(WelcomePage());
+                  Get.to(WelcomePage());
                 },
               ),
             ],

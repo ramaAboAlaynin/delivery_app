@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:delivery_app/controller/shoppingCart_controller.dart';
-import 'package:delivery_app/model/shoppingCart.dart';
+import 'package:delivery_app/core/config.dart';
 import 'package:delivery_app/view/products.dart';
+import 'package:delivery_app/view/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -241,75 +241,51 @@ Widget buildProduct(
 }) {
   return Padding(
     padding: const EdgeInsets.only(right: 12.0),
-    child: Material(
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.white,
-      child: Container(
-        width: 120,
-        height: 180, // Increased height for button space
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.grey[200],
-        ),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                imageAssetPath,
-                width: double.infinity,
-                height: 120, // Adjusted height for image
-                fit: BoxFit.cover,
-              ),
-            ),
-            Positioned(
-              bottom: 40, // Adjusted position for title
-              left: 10,
-              right: 10,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200]!.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+    child: GestureDetector(
+      child: Material(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        child: Container(
+          width: 120,
+          height: 180,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.grey[200],
+          ),
+          child: Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  imageAssetPath,
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 5,
-              left: 10,
-              right: 10,
-              child: ElevatedButton(
-                onPressed: () {
-                  Get.find<ShoppingcartController>().addToCart(id, 1);
-                  Get.snackbar(
-                    "Added to Cart",
-                    "$name has been added to your cart.",
-                    snackPosition: SnackPosition.BOTTOM,
-                    duration: const Duration(seconds: 2),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, // Button color
-                  shape: RoundedRectangleBorder(
+              Positioned(
+                bottom: 20,
+                left: 10,
+                right: 10,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200]!.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-                child: const Text(
-                  "Add to Cart",
-                  style: TextStyle(color: Colors.white),
+                  child: Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     ),

@@ -1,5 +1,7 @@
+import 'package:delivery_app/controller/shoppingCart_controller.dart';
 import 'package:delivery_app/model/product.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../core/config.dart';
 
@@ -10,10 +12,13 @@ class ProductDetailScreen extends StatefulWidget {
     required this.product,
   });
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState(this.product);
+  State<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState(this.product);
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  late ShoppingcartController controller;
+
   // String imageUrl = 'https://example.com/product.jpg';
   //String productName = 'Product Name';
   //double productPrice = 49.99;
@@ -36,6 +41,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   void initState() {
     super.initState();
     productQuantity = product.quantity;
+    controller = Get.find<ShoppingcartController>();
   }
 
   @override
@@ -43,18 +49,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 241, 195, 211),
-        title: Text(
+        title: const Text(
           'Product Details',
           style: TextStyle(color: Colors.white),
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.shopping_cart,
               color: Colors.white,
             ),
             onPressed: () {
-              print("object");
+              Get.find<ShoppingcartController>().addToCart(product.id, 1);
+              Get.snackbar(
+                "Added to Cart.",
+                "added successfully",
+                snackPosition: SnackPosition.BOTTOM,
+                duration: const Duration(seconds: 2),
+              );
             },
           ),
         ],
@@ -68,7 +80,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               // Image.network(imageUrl),
               //SizedBox(height: 300.0),
               SizedBox(
-          height: 300.0,
+                height: 300.0,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(

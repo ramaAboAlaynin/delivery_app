@@ -1,5 +1,7 @@
 import 'package:delivery_app/model/shoppingCart.dart';
+import 'package:delivery_app/services/OrdersServices.dart';
 import 'package:delivery_app/services/shoppingCartApi.dart';
+import 'package:delivery_app/view/OrdersScreen.dart';
 import 'package:get/get.dart';
 
 class ShoppingcartController extends GetxController {
@@ -59,5 +61,14 @@ class ShoppingcartController extends GetxController {
 
   void clearCart() {
     cartItems.clear();
+  }
+
+  void createOrder() async {
+    try {
+      await OrderService().createOrder();
+      Get.to(OrdersScreen());
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -4,24 +4,24 @@ import 'OrderDetailsPage.dart';
 import '../model/OrderModel.dart';
 import '../controller/OrdersController.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
+  @override
+  State<OrdersScreen> createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
   final OrderController controller = Get.put(OrderController());
+
+  @override
+  void initState() {
+    controller.fetchOrders();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        title: Text(
-          'Order Screen',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-          ),
-        ),
-        backgroundColor: Colors.pinkAccent,
-        centerTitle: true,
-      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -35,7 +35,7 @@ class OrdersScreen extends StatelessWidget {
                 } else {
                   return RefreshIndicator(
                     onRefresh: () async {
-                       await controller.fetchOrders();
+                      await controller.fetchOrders();
                     },
                     child: ListView.builder(
                       itemCount: controller.orders.length,
@@ -71,7 +71,11 @@ class OrdersScreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => OrderDetailsPage(orderId: order.orderId, status: order.orderStatus, totalPrice: order.totalPrice, ),
+                                    builder: (context) => OrderDetailsPage(
+                                      orderId: order.orderId,
+                                      status: order.orderStatus,
+                                      totalPrice: order.totalPrice,
+                                    ),
                                   ),
                                 );
                               },

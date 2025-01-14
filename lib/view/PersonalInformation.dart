@@ -45,84 +45,78 @@ class PersonalInformation extends StatelessWidget {
                     ),
                   )),
               SizedBox(height: 30),
-              Obx(() => TextField(
-                    controller:
-                        TextEditingController(text: controller.firstName.value),
-                    onChanged: (value) {
-                      controller.firstName.value = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: "First Name",
-                      labelStyle:
-                          TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 128, 171),
-                          width: 1.0,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 128, 171),
-                          width: 1.0,
-                        ),
-                      ),
+              TextField(
+                onChanged: (value) {
+                  controller.firstName.value = value;
+                },
+                decoration: InputDecoration(
+                  labelText: "First Name",
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 255, 128, 171),
+                      width: 1.0,
                     ),
-                  )),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 255, 128, 171),
+                      width: 1.0,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 30),
-              Obx(() => TextField(
-                    controller:
-                        TextEditingController(text: controller.lastName.value),
-                    onChanged: (value) {
-                      controller.lastName.value = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Last Name",
-                      labelStyle:
-                          TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 128, 171),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 128, 171),
-                          width: 1.0,
-                        ),
-                      ),
+              TextField(
+                onChanged: (value) {
+                  controller.lastName.value = value;
+                },
+                decoration: InputDecoration(
+                  labelText: "Last Name",
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 255, 128, 171),
                     ),
-                  )),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 255, 128, 171),
+                      width: 1.0,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 30),
-              Obx(() => TextField(
-                    controller:
-                        TextEditingController(text: controller.location.value),
-                    onChanged: (value) {
-                      controller.location.value = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Location",
-                      labelStyle:
-                          TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 128, 171),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 128, 171),
-                          width: 1.0,
-                        ),
-                      ),
+              TextField(
+                onChanged: (value) {
+                  controller.location.value = value;
+                },
+                decoration: InputDecoration(
+                  labelText: "Location",
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 117, 117, 117)),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 255, 128, 171),
                     ),
-                  )),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 255, 128, 171),
+                      width: 1.0,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 30),
               MaterialButton(
                 elevation: 0.5,

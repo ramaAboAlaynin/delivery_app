@@ -21,4 +21,13 @@ class OrderService {
       throw Exception('Error: $e');
     }
   }
+
+  Future<void> createOrder() async {
+    try {
+      await http.get(Uri.parse('${Config.baseUrl}/api/orders/createOrder'),
+          headers: {'Authorization': 'Bearer ${Config.token.toString()}'});
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
 }

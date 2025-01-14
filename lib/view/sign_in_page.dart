@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:delivery_app/core/config.dart';
+import 'package:delivery_app/view/sign_in_driver.dart';
+import 'package:delivery_app/view/sign_in_user.dart';
 import 'package:delivery_app/view/stores.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,7 @@ class _WelcomePageState extends State<SignInPage> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/image/photo1final.jpg'),
+              image: AssetImage('assets/images/photo1final.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -64,10 +66,10 @@ class _WelcomePageState extends State<SignInPage> {
                     padding: EdgeInsets.symmetric(vertical: 20),
                   ),
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => SignInUser()),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignInUser()),
+                    );
                   },
                   child: Text(
                     'Sign in user ',
@@ -86,11 +88,11 @@ class _WelcomePageState extends State<SignInPage> {
                     padding: EdgeInsets.symmetric(vertical: 20),
                   ),
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => DriverSignInPage()),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DriverSignInPage()),
+                    );
                   },
                   child: Text(
                     'Sign in driver',

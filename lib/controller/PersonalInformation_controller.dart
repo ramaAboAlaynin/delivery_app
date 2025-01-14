@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:delivery_app/view/main_page.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:delivery_app/view/stores.dart';
@@ -8,10 +9,10 @@ class PersonalInformationController extends GetxController {
   var firstName = ''.obs;
   var lastName = ''.obs;
   var location = ''.obs;
-  var image = Rx<File?>(null);  
+  var image = Rx<File?>(null);
   final _picker = ImagePicker();
-  final ProfileService profileService = ProfileService(); 
-  
+  final ProfileService profileService = ProfileService();
+
   // Function to pick an image
   Future<void> pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -30,7 +31,7 @@ class PersonalInformationController extends GetxController {
         image.value!,
       );
       if (success) {
-        Get.to(Stores()); // Navigate to the stores screen if successful
+        Get.to(MainPage()); // Navigate to the stores screen if successful
       } else {
         print("Profile update failed.");
       }

@@ -8,7 +8,7 @@ class Shoppingcartapi {
       "${Config.baseUrl}/api/cart/get",
       options: Options(
         headers: {
-          'Authorization': Config.token,
+          'Authorization': 'Bearer ${Config.token.toString()}',
         },
       ),
     );
@@ -21,7 +21,7 @@ class Shoppingcartapi {
       "${Config.baseUrl}/api/cart/add",
       options: Options(
         headers: {
-          'Authorization': Config.token,
+          'Authorization': 'Bearer ${Config.token.toString()}',
         },
       ),
       data: {
@@ -35,7 +35,7 @@ class Shoppingcartapi {
     await Dio().post("${Config.baseUrl}/api/cart/updatecart",
         options: Options(
           headers: {
-            'Authorization': Config.token,
+            'Authorization': 'Bearer ${Config.token.toString()}',
           },
         ),
         data: {
@@ -49,7 +49,7 @@ class Shoppingcartapi {
       "${Config.baseUrl}/api/cart/removeproduct",
       options: Options(
         headers: {
-          'Authorization': Config.token,
+          'Authorization': 'Bearer ${Config.token.toString()}',
         },
       ),
       data: {

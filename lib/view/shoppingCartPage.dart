@@ -1,4 +1,6 @@
 import 'package:delivery_app/controller/shoppingCart_controller.dart';
+import 'package:delivery_app/model/OrderModel.dart';
+import 'package:delivery_app/view/OrdersScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -91,10 +93,12 @@ class _ShoppingcartpageState extends State<Shoppingcartpage> {
                     ),
                   );
                 }),
-                //  ElevatedButton(
-                // onPressed: () => Get.to(() => ),
-                // child: const Text("Buy"),
-                //),
+                ElevatedButton(
+                  onPressed: () {
+                    controller.createOrder();
+                  },
+                  child: const Text("Buy"),
+                ),
               ],
             ),
           ),
